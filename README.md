@@ -1,4 +1,4 @@
-# writing-korean-book-in-pandoc: pandoc 으로 한글 책 만들기
+# writing-korean-book-in-pandoc: pandoc + markdown 으로 한글 책 만들기
 
 ## 왜 markdown + pandoc인가?
 출판을 위한 저작 소프트웨어는 여러 가지가 있다.
@@ -37,12 +37,63 @@ markup 랭귀즈를 사용할 때의 워크 플로우는:
 1. 소스를 버전 컨트롤 할 수있다. 소스가 그냥 텍스트 (plain text) 이므로.
     1. 사실 이것은 어마어마한 장점이다. 버전 컨트롤이 가능하다는 것은 협업과 공유가 쉽다는 것이기 때문이다.
 1. 한번 작성하면 다양한 포맷으로 아웃풋이 지원된다. 여기서 pandoc이 중요해진다.
-1. 인기가 좋다. 잘나가는 여러 플랫폼에서 지원한다. Github. 
+1. 인기가 좋다. 잘나가는 여러 플랫폼에서 지원한다. 
+    1. Github 과 bitbucket은 자동으로 markdown을 웹페이지로 포맷해준다.
+    1. Oreilly 의 웹 저작 시스템 Atlas도 마크다운을 지원한다.
 
-마크다운은 이러한 장점들 때문에 여러 용도로 사용된다.
+마크다운은 이러한 장점들 때문에 여러 용도로 사용된다:
+
 1. git 리포에 README / README.md 를 작성할 때. github이나 bitbucket에서는 자연스럽게.
 1. R을 사용하는 사람은 Rmd라는 포맷으로 코드를 합쳐버린다.
 1. 책을 저술할 때도!
 
 
-## 준비작업
+## pandoc 작업 환경 설정
+
+1. 우선 좋은 에디터가 필요하다. markdown syntax highlighting 을 지원하는. 본인은 sublime markdown extension package 를 사용중.
+2. latex 을 설치하도록 하자. Mac OSX라면 https://tug.org/mactex/ 에서 거대한 (2.5GB) MacTeX를 다운로드 후 설치하는 것이 속편하다.
+    1. 중요한 것은 기본 latex이 한글 지원이 빈약하다는 것이다. 다음의 페이지들이 좋은 참조가 될 것이다.
+    1. http://wiki.ktug.org/wiki/wiki.php/설치하기MacOSX/MacTeX  : 꼭 실행하자. nanum 폰트를 받을 수 있다. 반복하자면:
+    ```bash
+    $ sudo tlmgr repository add http://ftp.ktug.org/KTUG/texlive/tlnet ktug
+    $ sudo tlmgr pinning add ktug "*"
+    $ sudo tlmgr install nanumttf hcr-lvt
+    $ sudo tlmgr update --all --self
+    ```
+    1. http://wiki.ktug.org/wiki/wiki.php/MacOSX와XeLaTeX : (아직 실행 안함.)
+3. pandoc 을 설치한다.
+    1. http://pandoc.org/
+
+설치 완료 후 pandoc의 튜토리얼을 따라하면 된다. 한글 버전이 필요하다면 이 document 를 사용해도 된다. 
+Bash shell에서:
+
+```bash
+cd ~
+git clone git@github.com:Jaimyoung/writing-korean-book-in-pandoc.git 
+cd writing-korean-book-in-pandoc
+pandoc README.md -f markdown -t latex -s -o test1.pdf --latex-engine=xelatex --variable mainfont='Nanum Myeongjo'
+
+```
+
+이중 마지막 옵션은:
+
+- `-f` : "from" 소스 포맷. 
+- `-t` : "to" 타겟 포맷.
+- `-o` : "output" 화일 이름. `pdf` 확장자가 붙으면, latex 포맷으로 변환 후, pdflatex (혹은 xelatex)을 통해 pdf 화일이 생성된다.
+- `-s` : "standalone" 한 화일로 모으기?
+- `--latex-engine` : 디폴트인 pdflatex은 유니코드 / 한글 처리에 문제가 많다. xelatex라는 엔진을 사용한다.
+- `--variable` : 은 템플릿에 사용될 여러 변수를 커맨드 라인에서 설정해 준다.
+    - 참조: http://pandoc.org/demo/example9/templates.html 에서처럼 `pandoc -D latex`을 실행하면 템플릿에 어떤 변수들이 지정되는지 알 수 있다.
+    - 참조: http://pandoc.org/demos.html 을 보면 폰트와 다른 변수를 설정하는 부분이 나온다. 좋은 예이다:
+    `pandoc -N --template=mytemplate.tex --variable mainfont=Georgia --variable sansfont=Arial --variable monofont="Bitstream Vera Sans Mono" --variable fontsize=12pt --variable version=1.14 README --latex-engine=xelatex --toc -o example14.pdf`
+- `mainfont='Nanum Myeongjo'` : Mac OSX 에서 이 옵션을 넣어주지 않으면 생성된 pdf 화일에 한글이 보이지 않는다.
+    - FontBook 을 실행하면 한글 폰트중 무엇이 설치되어있는지 알 수 있다.
+    - `ApplyMyungjo`의 문제는 bold와 italic이 제공되지 않는 것이다.
+
+
+## 앞으로 넣고 싶은 내용
+- 목차 (table of contents)
+- 색인 (index)
+- 주석 (footnote)
+
+
