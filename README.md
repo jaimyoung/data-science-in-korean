@@ -84,7 +84,7 @@ pandoc README.md -f markdown -t latex -s -o README.pdf --latex-engine=xelatex --
 위에서 이야기한대로, sublime이 셋업된 상태이라면 README.md화일을 열었을 때 다음처럼 문서의 구조가
 이미 한눈에 이해될 것이다.
 
-![Sublime markdown screenshot](https://github.com/Jaimyoung/writing-korean-book-in-pandoc/blob/master/sublime-screenshot.png "Sublime markdown screenshot")
+![Sublime markdown screenshot](sublime-screenshot.png "Sublime markdown screenshot")
 
 
 어쨌건, 마지막 명령 `pandoc` 컴파일이 성공적으로 실행되면 디렉토리에 `README.pdf` 화일이 생성된다.
