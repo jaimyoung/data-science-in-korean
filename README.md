@@ -1,4 +1,4 @@
-# writing-korean-book-in-pandoc: pandoc + markdown 으로 한글 책 만들기
+# pandoc + markdown 으로 한글 책 만들기
 
 ## 왜 markdown + pandoc인가?
 출판을 위한 저작 소프트웨어는 여러 가지가 있다.
