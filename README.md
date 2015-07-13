@@ -81,9 +81,15 @@ cd writing-korean-book-in-pandoc
 pandoc README.md -f markdown -t latex -s -o README.pdf --latex-engine=xelatex --variable mainfont='Nanum Myeongjo'
 ```
 
-위 명령을 실행하면 디렉토리에 `README.pdf` 화일이 생성되면 완성!
+위에서 이야기한대로, sublime이 셋업된 상태이라면 README.md화일을 열었을 때 다음처럼 문서의 구조가
+이미 한눈에 이해될 것이다.
 
-이중 마지막 명령의 옵션을 좀 더 살펴보자:
+![Sublime markdown screenshot](https://github.com/Jaimyoung/writing-korean-book-in-pandoc/blob/master/sublime-screenshot.png "Sublime markdown screenshot")
+
+
+어쨌건, 마지막 명령 `pandoc` 컴파일이 성공적으로 실행되면 디렉토리에 `README.pdf` 화일이 생성된다.
+이 명령의 옵션을 좀 더 자세히 살펴보면:
+
 - `-f` : "from" 소스 포맷. 
 - `-t` : "to" 타겟 포맷.
 - `-o` : "output" 화일 이름. `pdf` 확장자가 붙으면, latex 포맷으로 변환 후, pdflatex (혹은 xelatex)을 통해 pdf 화일이 생성된다.
