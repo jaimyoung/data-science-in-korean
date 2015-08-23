@@ -16,26 +16,25 @@ LaTeX은 수학이나 공학을 전공한 분들은 많이 사용하였을 것�
 하지만 일반인들이 사용하기에는 어려운 포맷이였다. 
 이 글에서는 LaTex은 생략하고 마크다운만 다루도록 한다.
 
-### 마크다운이란. 단점.
+### 마크다운이란
 [마크다운(markdown)](http://daringfireball.net/projects/markdown/)은 서민들을 위한 markup 이다.
 비교적 간단하고 직관적인 [몇개의 markup tag을 사용한다](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
 
-**마크다운 랭귀지를 사용하는 것의 단점은 복잡하다는 것이다**. 
-markup 랭귀즈를 사용할 때의 워크 플로우는:
+마크다운 랭귀지를 사용하는 것의 단점은 **워크플로우가 복잡하다는 것이다**:
 
-1. 랭귀지를 배운다. (사실 간단하다. 5분이면 배운다.)
-2. 텍스트 에디터로 코딩하듯 문서를 작성한다.
-3. 커맨드 라인에서 컴파일한다. (여러 사용례에서 컴파일의 필요가 없다. 책을 저술할 용도로 pandoc등을 사용할 때를 제외하고는.)
-4. 1-3을 반복한다.
+1. 텍스트 에디터로 코딩하듯 문서를 작성한다.
+1. 커맨드 라인에서 컴파일한다. 
+1. 결과를 살펴본다. 
+1. 1-3을 반복한다.
 
-### 마크다운의 장점.
-그러면 이런 귀챦은 것을 감수할 이유는 무엇이 있을까?
-몇가지 장점이 있다.
+그러면 이런 귀챦은 워크플로우를 감수할 이유는 무엇이 있을까?
+장점을 들자면:
 
-1. 마크다운은 비교적 배우기 쉽다. (html이나 LaTeX에 비해서)
-1. 마크다운은 읽기도 쉽다. 여러 에디터가 컬러 코딩을 지원하고 (예: [Sublime](http://www.sublimetext.com/)
+1. 배우기 쉽다. (html이나 LaTeX에 비해서)
+1. 읽기 쉽다. 여러 에디터가 컬러 코딩을 지원하고 (예: [Sublime](http://www.sublimetext.com/)
 [markdown extension package](https://github.com/jonschlinkert/sublime-markdown-extended)), 
 [브라우저 extension](https://github.com/volca/markdown-preview)도 존재한다.
+    - 따라서 많은 경우 컴파일의 필요는 없다.
 1. 소스를 버전 컨트롤 할 수있다. 소스가 그냥 텍스트 (plain text) 이므로.
     1. 사실 이것은 어마어마한 장점이다. 버전 컨트롤이 가능하다는 것은 협업과 공유가 쉽다는 것이기 때문이다.
 1. 한번 작성하면 다양한 포맷으로 아웃풋이 지원된다. 여기서 pandoc이 중요해진다.
@@ -52,20 +51,24 @@ markup 랭귀즈를 사용할 때의 워크 플로우는:
 
 ## pandoc 작업 환경 설정
 
-1. 우선 좋은 에디터가 필요하다. markdown syntax highlighting 을 지원하는. 
-    1. 본인은 sublime markdown extension package 를 사용중.
-2. latex 을 설치하도록 하자. Mac OSX라면 https://tug.org/mactex/ 에서 거대한 (2.5GB) MacTeX를 다운로드 후 설치하는 것이 속편하다.
-    1. 중요한 것은 기본 latex이 한글 지원이 빈약하다는 것이다. 다음의 페이지들이 좋은 참조가 될 것이다.
-    1. http://wiki.ktug.org/wiki/wiki.php/설치하기MacOSX/MacTeX  : 꼭 실행하자. nanum 폰트를 받을 수 있다. 반복하자면:
-    ```bash
-    $ sudo tlmgr repository add http://ftp.ktug.org/KTUG/texlive/tlnet ktug
-    $ sudo tlmgr pinning add ktug "*"
-    $ sudo tlmgr install nanumttf hcr-lvt
-    $ sudo tlmgr update --all --self
-    ```
-    1. http://wiki.ktug.org/wiki/wiki.php/MacOSX와XeLaTeX : (아직 실행 안함.)
-3. pandoc 을 설치한다.
-    1. http://pandoc.org/
+우선 좋은 에디터가 필요하다. markdown syntax highlighting 을 지원하는. 
+본인은 sublime markdown extension package 를 사용한다.
+
+그리고 latex을 설치해야 한다.
+Mac OSX라면 https://tug.org/mactex/ 에서 거대한 (2.5GB) MacTeX를 다운로드 후 설치하는 것이 속편하다.
+그러나 기본 latex은 한글 지원이 빈약하다. 
+그러므로 <http://wiki.ktug.org/wiki/wiki.php/설치하기MacOSX/MacTeX>의
+내용을 따라 한글지원 모듈과, 특히  나눔 nanum 폰트를 다운받자.
+터미널에서 다음을 실행하면 된다.
+
+    sudo tlmgr repository add http://ftp.ktug.org/KTUG/texlive/tlnet ktug
+    sudo tlmgr pinning add ktug "*"
+    sudo tlmgr install nanumttf hcr-lvt
+    sudo tlmgr update --all --self
+
+<http://wiki.ktug.org/wiki/wiki.php/MacOSX와XeLaTeX>도 참조하자. (본인은 아직 실행 안함)
+
+마지막으로 pandoc 을 설치한다. <http://pandoc.org/>
 
 ## markdown + pandoc 워크 플로우 시험
 시험해보기 위해서는 설치 완료 후 [pandoc의 튜토리얼을](http://pandoc.org/getting-started.html) 따라하면 된다. 
@@ -94,7 +97,8 @@ pandoc README.md -f markdown -t latex -s -o README.pdf --latex-engine=xelatex --
 - `-t` : "to" 타겟 포맷.
 - `-o` : "output" 화일 이름. `pdf` 확장자가 붙으면, latex 포맷으로 변환 후, pdflatex (혹은 xelatex)을 통해 pdf 화일이 생성된다.
 - `-s` : "standalone" 한 화일로 모으기?
-- `--latex-engine` : 디폴트인 pdflatex은 유니코드 / 한글 처리에 문제가 많다. xelatex라는 엔진을 사용한다.
+- `--latex-engine` : 디폴트인 pdflatex은 유니코드 / 한글 처리에 문제가 많다. 
+    xelatex라는 엔진을 사용한다.
 - `--variable` : 은 템플릿에 사용될 여러 변수를 커맨드 라인에서 설정해 준다.
     - 참조: http://pandoc.org/demo/example9/templates.html 에서처럼 `pandoc -D latex`을 실행하면 템플릿에 어떤 변수들이 지정되는지 알 수 있다.
     - 참조: http://pandoc.org/demos.html 을 보면 폰트와 다른 변수를 설정하는 부분이 나온다. 좋은 예이다:
@@ -117,9 +121,20 @@ pandoc README.md -f markdown -t latex -s -o README.pdf --latex-engine=xelatex --
 
 ... 등등이다. 
 
-## 앞으로 넣고 싶은 내용
+pandoc이 지원하는 쓸모있는 기능들:
+
 - 목차 (table of contents)
-- 색인 (index)
+    - `--toc` 혹은 `--table-of-contents` 옵션을 추가하면 된다.
+
+    pandoc README.md -f markdown -t latex -s -o README.pdf --toc --latex-engine=xelatex --variable mainfont='Nanum Myeongjo'
+
+- 인용 (citation): <http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html>
 - 주석 (footnote)
+    - Pandoc markdown 은 `[^1] 주석입니다` 형식으로 넣어주면 된다[^1].
+    줄이 길어지면 인덴트를 해주면 된다.
+    http://pandoc.org/README.html#footnotes 를 참조하자.    
+- 색인 (index): 확인바람
+
+[^1] 주석입니다.
 
 
