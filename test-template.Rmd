@@ -1,0 +1,76 @@
+---
+title: "한글 레퍼런스 R 마크다운 템플릿"
+author: "권재명"
+date: "July 18, 2015"
+output:
+  word_document:
+    highlight: tango
+    reference_docx: korean-template.docx
+  pdf_document:
+    latex_engine: xelatex
+mainfont: NanumGothic
+---
+# 첫째 헤더
+## 둘째 헤더
+### 셋째 헤더
+#### 넷째 헤더
+
+코드:
+```r
+print("문자열") # 주석
+```
+
+테이블:
+
+|우정렬 |좌정렬| 기본    | 중앙정렬 |
+|------:|:-----|---------|:------:|
+|   12  |  12  |    12   |    12  |
+|  123  |  123 |   123   |   123  |
+|    1  |    1 |     1   |     1  |
+
+  : 간단한 테이블
+
+불릿 리스트예:
+
+- 첫째
+- 둘째
+
+숫자 리스트예:
+
+1. 하나
+2. 둘
+
+블록 쿼트 예:
+
+> 데이터 = 신호 + 잡음
+> 
+> -- <cite>(출처 분명)</cite>
+
+
+
+
+# R 마크다운 내용
+(주: 다음 내용은 R 스튜디오에서 File > New File > R Markdown ... 
+을 선택하면 자동으로 생성되는 내용이다.)
+
+이 화일은 R 마크다운(Markdown) 문서이다.
+마크다운은 HTML, PDF, MS 워드(Word) 문서를 작성하기 위한
+간단한 포맷팅구문(formatting syntax)이다.
+자세한 사항은 <http://rmarkdown.rstudio.com> 를 참조하자.
+
+문서에서 **니트(Knit, 뜨개질을 하다)** 버튼을 누르면
+문서의 내용과 R 코드청크(code chunks)의 결과를 모두 포함하는
+문서가 생성된다. R 코드청크는 다음처럼 넣어준다:
+
+```{r}
+summary(cars) # 자동차 데이터의 통계량
+```
+
+다음처럼 플롯(plot)도 넣을 수 있다:
+
+```{r, echo=FALSE}
+plot(cars) # 자동차 데이터의 분산도
+```
+
+`echo = FALSE` 파라메터를 코드청크에 넣어주면 도표를 만드는
+R 코드가 출력되지 않는다.
